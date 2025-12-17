@@ -1,11 +1,42 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const name = "Yousif Husni";
+const headline = "Computer Science student building practical software projects.";
+const bio =
+  "I’m a Computer Science student at the University of Houston. I build clean, reliable projects and I’m currently seeking internship and scholarship opportunities.";
+const links = [
+  { label: "Projects", href: "/projects" },
+  { label: "Resume", href: "/resume" },
+  { label: "Contact", href: "/contact" },
+];
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yousif Husni | Personal Site</title>
+    <style>
+      :root { --bg:#0b0f17; --text:#e5e7eb; --muted:#9ca3af; }
+      body { margin:0; font-family: system-ui; background: var(--bg); color: var(--text); }
+      .wrap { max-width: 900px; margin: 0 auto; padding: 56px 20px; }
+      .card { background:#111827; border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:24px; }
+      h1 { margin:0 0 10px; font-size:40px; }
+      p { margin:0; color: var(--muted); line-height:1.6; }
+      .links { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+      a { color: var(--text); text-decoration:none; background: rgba(255,255,255,.06);
+          border: 1px solid rgba(255,255,255,.10); padding:10px 12px; border-radius:12px; }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="card">
+        <h1>{name}</h1>
+        <p><strong>{headline}</strong></p>
+        <p style="margin-top:10px;">{bio}</p>
+        <div class="links">
+          {links.map((l) => <a href={l.href}>{l.label}</a>)}
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
