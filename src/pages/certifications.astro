@@ -1,0 +1,62 @@
+---
+const projects = [
+  {
+    name: "Banker’s Algorithm Simulation",
+    desc: "Resource allocation simulation using processes and synchronization.",
+    tech: "C • Processes • Semaphores/Pipes",
+    link: "https://github.com/YOUR_GITHUB_USERNAME",
+  },
+  {
+    name: "Task Manager Web App",
+    desc: "A simple app to create, track, and complete tasks with a clean UI.",
+    tech: "JavaScript • UI • Local Storage",
+    link: "https://github.com/YOUR_GITHUB_USERNAME",
+  },
+  {
+    name: "Weather Dashboard",
+    desc: "Displays current weather and a short forecast using a public API.",
+    tech: "JavaScript • API • Responsive Design",
+    link: "https://github.com/YOUR_GITHUB_USERNAME",
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yousif Husni | Personal Site</title>
+    <style>
+      :root { --bg:#0b0f17; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; }
+      body { margin:0; font-family: system-ui; background: var(--bg); color: var(--text); }
+      .wrap { max-width: 900px; margin: 0 auto; padding: 44px 20px; }
+      a { color:#93c5fd; text-decoration:none; }
+      .top { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+      .grid { display:grid; gap:14px; margin-top:18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .card { background: var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px; }
+      .muted { color: var(--muted); }
+      .pill { display:inline-block; margin-top:10px; font-size:12px; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="top">
+        <h1 style="margin:0;">Projects</h1>
+        <a href="/">← Home</a>
+      </div>
+
+      <div class="grid">
+        {projects.map((p) => (
+          <div class="card">
+            <h3 style="margin:0 0 6px;">{p.name}</h3>
+            <div class="muted">{p.desc}</div>
+            <div class="pill">{p.tech}</div>
+            <div style="margin-top:12px;">
+              <a href={p.link} target="_blank">Link →</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
+  </body>
+</html>
