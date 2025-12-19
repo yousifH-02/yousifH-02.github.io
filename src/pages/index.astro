@@ -1,42 +1,288 @@
 ---
 const name = "Yousif Husni";
-const headline = "Computer Science student building practical software projects.";
-const bio =
-  "I’m a Computer Science student at the University of Houston. I build clean, reliable projects and I’m currently seeking internship and scholarship opportunities.";
-const links = [
-    { label: "Resume", href: "/resume" },
-{ label: "Certifications", href: "/certifications" },
-  { label: "Contact", href: "/contact" },
+const tagline = "Computer Science student building practical software and sharpening cybersecurity skills.";
+const location = "Houston, TX";
+const email = "YOUSIFMOYASER@GMAIL.COM";
+
+const quickLinks = [
+  { label: "Certifications", href: "/certifications", note: "Udemy + Forage + PDFs" },
+  { label: "Resume", href: "/resume", note: "View or download" },
+  { label: "Contact", href: "/contact", note: "Reach me fast" },
 ];
+
+const highlights = [
+  { title: "B.S. Computer Science", detail: "University of Houston • Expected 2027" },
+  { title: "Associate’s (Completed)", detail: "Wharton County Junior College (WCJC)" },
+  { title: "Focus", detail: "Projects • Internships • Scholarship applications" },
+];
+
+const initials = "YH";
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Yousif Husni | Personal Site</title>
+    <title>{name} | Personal Site</title>
     <style>
-      :root { --bg:#0b0f17; --text:#e5e7eb; --muted:#9ca3af; }
-      body { margin:0; font-family: system-ui; background: var(--bg); color: var(--text); }
-      .wrap { max-width: 900px; margin: 0 auto; padding: 56px 20px; }
-      .card { background:#111827; border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:24px; }
-      h1 { margin:0 0 10px; font-size:40px; }
-      p { margin:0; color: var(--muted); line-height:1.6; }
-      .links { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
-      a { color: var(--text); text-decoration:none; background: rgba(255,255,255,.06);
-          border: 1px solid rgba(255,255,255,.10); padding:10px 12px; border-radius:12px; }
+      :root{
+        --bg:#0b0f17;
+        --card:#0f172a;
+        --text:#e5e7eb;
+        --muted:#9ca3af;
+        --line: rgba(255,255,255,.10);
+        --shine: rgba(147,197,253,.22);
+      }
+      *{ box-sizing:border-box; }
+      body{
+        margin:0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        color: var(--text);
+        background:
+          radial-gradient(1200px 600px at 10% 0%, rgba(147,197,253,.18), transparent 60%),
+          radial-gradient(1000px 600px at 90% 10%, rgba(167,139,250,.14), transparent 55%),
+          radial-gradient(900px 500px at 50% 100%, rgba(34,211,238,.10), transparent 55%),
+          var(--bg);
+      }
+      a{ color: inherit; text-decoration:none; }
+      .wrap{ max-width: 1020px; margin: 0 auto; padding: 28px 18px 54px; }
+      .nav{
+        display:flex; align-items:center; justify-content:space-between; gap:12px;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(17,24,39,.35);
+        backdrop-filter: blur(10px);
+      }
+      .brand{ display:flex; align-items:center; gap:10px; }
+      .mark{
+        width: 34px; height: 34px; border-radius: 12px;
+        display:grid; place-items:center;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+        font-weight: 700;
+        letter-spacing: .5px;
+      }
+      .brandTitle{ display:flex; flex-direction:column; line-height:1.1; }
+      .brandTitle strong{ font-size: 14px; }
+      .brandTitle span{ font-size: 12px; color: var(--muted); }
+      .navlinks{ display:flex; gap:10px; flex-wrap:wrap; }
+      .chip{
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,.03);
+        font-size: 13px;
+      }
+      .chip:hover{ border-color: rgba(255,255,255,.22); }
+
+      .hero{
+        margin-top: 18px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        overflow:hidden;
+        background:
+          linear-gradient(135deg, rgba(147,197,253,.12), transparent 45%),
+          linear-gradient(225deg, rgba(167,139,250,.10), transparent 45%),
+          rgba(17,24,39,.32);
+        position:relative;
+      }
+      .heroInner{
+        padding: 34px 18px;
+        display:grid;
+        grid-template-columns: 1.4fr .9fr;
+        gap: 18px;
+      }
+      @media (max-width: 860px){
+        .heroInner{ grid-template-columns: 1fr; }
+      }
+      .name{
+        margin:0;
+        font-size: 46px;
+        letter-spacing: -0.8px;
+      }
+      .sub{
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 15.5px;
+        line-height: 1.5;
+        max-width: 52ch;
+      }
+      .metaRow{
+        margin-top: 14px;
+        display:flex; gap:10px; flex-wrap:wrap;
+      }
+      .pill{
+        display:inline-flex; align-items:center; gap:8px;
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,.03);
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .dot{
+        width:8px; height:8px; border-radius:999px;
+        background: rgba(34,211,238,.85);
+        box-shadow: 0 0 0 4px rgba(34,211,238,.12);
+      }
+
+      .ctaRow{ margin-top: 18px; display:flex; gap:10px; flex-wrap:wrap; }
+      .btn{
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,.04);
+        font-size: 14px;
+        display:inline-flex; align-items:center; gap:10px;
+      }
+      .btnPrimary{
+        background: linear-gradient(180deg, rgba(147,197,253,.18), rgba(255,255,255,.04));
+        border-color: rgba(147,197,253,.35);
+      }
+      .btn:hover{ border-color: rgba(255,255,255,.22); }
+
+      .sideCard{
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(15,23,42,.45);
+        padding: 16px;
+      }
+      .mono{
+        width: 100%;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background:
+          radial-gradient(400px 220px at 30% 20%, var(--shine), transparent 60%),
+          linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+        padding: 18px;
+        display:flex; align-items:center; justify-content:space-between; gap:12px;
+      }
+      .monoLeft{ display:flex; flex-direction:column; gap:4px; }
+      .monoLeft strong{ font-size: 13px; }
+      .monoLeft span{ font-size: 12px; color: var(--muted); }
+      .monoBadge{
+        width: 54px; height: 54px;
+        border-radius: 18px;
+        display:grid; place-items:center;
+        border: 1px solid var(--line);
+        background: rgba(0,0,0,.18);
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: .8px;
+      }
+      .sideList{ margin-top: 12px; display:grid; gap:10px; }
+      .linkCard{
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(255,255,255,.03);
+        padding: 12px;
+      }
+      .linkCard:hover{ border-color: rgba(255,255,255,.22); }
+      .linkCard strong{ font-size: 14px; }
+      .linkCard div{ font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+      .grid{
+        margin-top: 18px;
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      @media (max-width: 860px){
+        .grid{ grid-template-columns: 1fr; }
+      }
+      .mini{
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(15,23,42,.35);
+        padding: 14px;
+      }
+      .mini strong{ font-size: 13px; }
+      .mini div{ margin-top: 6px; color: var(--muted); font-size: 13px; line-height:1.4; }
+
+      .footer{
+        margin-top: 18px;
+        display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .footer a{ color: var(--text); }
     </style>
   </head>
+
   <body>
-    <main class="wrap">
-      <section class="card">
-        <h1>{name}</h1>
-        <p><strong>{headline}</strong></p>
-        <p style="margin-top:10px;">{bio}</p>
-        <div class="links">
-          {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    <div class="wrap">
+      <header class="nav">
+        <div class="brand">
+          <div class="mark">{initials}</div>
+          <div class="brandTitle">
+            <strong>{name}</strong>
+            <span>{location}</span>
+          </div>
+        </div>
+
+        <nav class="navlinks">
+          <a class="chip" href="/certifications">Certifications</a>
+          <a class="chip" href="/resume">Resume</a>
+          <a class="chip" href="/contact">Contact</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="heroInner">
+          <div>
+            <h1 class="name">{name}</h1>
+            <p class="sub">{tagline}</p>
+
+            <div class="metaRow">
+              <span class="pill"><span class="dot"></span> Open to internships</span>
+              <span class="pill">Computer Science • UH</span>
+              <span class="pill">Expected graduation: 2027</span>
+            </div>
+
+            <div class="ctaRow">
+              <a class="btn btnPrimary" href="/resume">View Resume →</a>
+              <a class="btn" href="/certifications">See Certifications →</a>
+              <a class="btn" href={`mailto:${email}`}>Email Me →</a>
+            </div>
+          </div>
+
+          <aside class="sideCard">
+            <div class="mono">
+              <div class="monoLeft">
+                <strong>Personal Mark</strong>
+                <span>Clean, minimal identity</span>
+              </div>
+              <div class="monoBadge">{initials}</div>
+            </div>
+
+            <div class="sideList">
+              {quickLinks.map((l) => (
+                <a class="linkCard" href={l.href}>
+                  <strong>{l.label}</strong>
+                  <div>{l.note}</div>
+                </a>
+              ))}
+            </div>
+          </aside>
         </div>
       </section>
-    </main>
+
+      <section class="grid">
+        {highlights.map((h) => (
+          <div class="mini">
+            <strong>{h.title}</strong>
+            <div>{h.detail}</div>
+          </div>
+        ))}
+      </section>
+
+      <footer class="footer">
+        <div>© {new Date().getFullYear()} {name}</div>
+        <div>
+          <a href="/certifications">Certifications</a> · <a href="/resume">Resume</a> · <a href="/contact">Contact</a>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
