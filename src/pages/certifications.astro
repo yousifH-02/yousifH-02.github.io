@@ -1,32 +1,24 @@
 ---
 const email = "YOUSIFMOYASER@GMAIL.COM";
 
-const degree = {
-  title: "B.S. in Computer Science (in progress)",
-  school: "University of Houston",
-  notes: "Focused on building practical software projects and growing professionally.",
-};
-
 const certifications = [
-  // Udemy
   {
     title: "The Complete SQL Bootcamp",
     issuer: "Udemy",
     date: "June 2025",
-    link: "https://www.udemy.com/certificate/UC-cee8a5fa-8746-48c4-888c-17055352c8f1/",
+    link: "/certifications/SQL-UdemyCertif.pdf",
   },
-  // Forage
   {
     title: "Mastercard Cybersecurity Job Simulation",
     issuer: "Forage",
-    date: "September, 2025",
-    link: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/mfxGwGDp6WkQmtmTf/vcKAB5yYAgvemepGQ_mfxGwGDp6WkQmtmTf_68b7bf8a2e447e9e72c78ef1_1757912368051_completion_certificate.pdf",
+    date: "September 2025",
+    link: "/certifications/mastercard-cybersec-certif.pdf",
   },
   {
-    title: "Software Engineering Virtual Experience",
+    title: "Telstra Cybersecurity Job Simulation",
     issuer: "Forage",
-    date: "March, 2025",
-    link: "https://www.theforage.com/completion-certificates/M6JGAwZ52SMusMEcK/RNhbu8QnDzthwynEf_M6JGAwZ52SMusMEcK_68b7bf8a2e447e9e72c78ef1_1757961133776_completion_certificate.pdf",
+    date: "2025",
+    link: "/certifications/TelstraCertif.pdf",
   },
 ];
 ---
@@ -49,6 +41,7 @@ const certifications = [
       .tag { display:inline-block; margin-left:8px; font-size:12px; color: var(--muted); }
     </style>
   </head>
+
   <body>
     <main class="wrap">
       <div class="top">
@@ -57,10 +50,14 @@ const certifications = [
       </div>
 
       <section class="card">
-        <h2 style="margin:0 0 8px;">Degree</h2>
-        <div><strong>{degree.title}</strong></div>
-        <div class="muted">{degree.school}</div>
-        <div class="muted" style="margin-top:8px;">{degree.notes}</div>
+        <h2 style="margin:0 0 8px;">Academic Progress</h2>
+
+        <div><strong>University of Houston (UH)</strong></div>
+        <div class="muted">B.S. in Computer Science — Current Student</div>
+        <div class="muted">Expected Graduation: 2027</div>
+
+        <div style="margin-top:12px;"><strong>Wharton County Junior College (WCJC)</strong></div>
+        <div class="muted">Associate’s in Computer Science — Completed</div>
       </section>
 
       <section class="card">
@@ -77,7 +74,7 @@ const certifications = [
             <li>
               <strong>{c.title}</strong>
               <span class="tag">({c.issuer} • {c.date})</span>
-              <div><a href={c.link} target="_blank">View credential →</a></div>
+              <div><a href={c.link} target="_blank">View PDF →</a></div>
             </li>
           ))}
         </ul>
