@@ -1,22 +1,32 @@
 ---
-const projects = [
+const email = "YOUSIFMOYASER@GMAIL.COM";
+
+const degree = {
+  title: "B.S. in Computer Science (in progress)",
+  school: "University of Houston",
+  notes: "Focused on building practical software projects and growing professionally.",
+};
+
+const certifications = [
+  // Udemy
   {
-    name: "Banker’s Algorithm Simulation",
-    desc: "Resource allocation simulation using processes and synchronization.",
-    tech: "C • Processes • Semaphores/Pipes",
-    link: "https://github.com/YOUR_GITHUB_USERNAME",
+    title: "The Complete SQL Bootcamp",
+    issuer: "Udemy",
+    date: "June 2025",
+    link: "https://www.udemy.com/certificate/UC-cee8a5fa-8746-48c4-888c-17055352c8f1/",
+  },
+  // Forage
+  {
+    title: "Mastercard Cybersecurity Job Simulation",
+    issuer: "Forage",
+    date: "September, 2025",
+    link: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/mfxGwGDp6WkQmtmTf/vcKAB5yYAgvemepGQ_mfxGwGDp6WkQmtmTf_68b7bf8a2e447e9e72c78ef1_1757912368051_completion_certificate.pdf",
   },
   {
-    name: "Task Manager Web App",
-    desc: "A simple app to create, track, and complete tasks with a clean UI.",
-    tech: "JavaScript • UI • Local Storage",
-    link: "https://github.com/YOUR_GITHUB_USERNAME",
-  },
-  {
-    name: "Weather Dashboard",
-    desc: "Displays current weather and a short forecast using a public API.",
-    tech: "JavaScript • API • Responsive Design",
-    link: "https://github.com/YOUR_GITHUB_USERNAME",
+    title: "Software Engineering Virtual Experience",
+    issuer: "Forage",
+    date: "March, 2025",
+    link: "https://www.theforage.com/completion-certificates/M6JGAwZ52SMusMEcK/RNhbu8QnDzthwynEf_M6JGAwZ52SMusMEcK_68b7bf8a2e447e9e72c78ef1_1757961133776_completion_certificate.pdf",
   },
 ];
 ---
@@ -32,31 +42,46 @@ const projects = [
       .wrap { max-width: 900px; margin: 0 auto; padding: 44px 20px; }
       a { color:#93c5fd; text-decoration:none; }
       .top { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
-      .grid { display:grid; gap:14px; margin-top:18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-      .card { background: var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px; }
+      .card { background: var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px; margin-top:14px; }
       .muted { color: var(--muted); }
-      .pill { display:inline-block; margin-top:10px; font-size:12px; color: var(--muted); }
+      ul { margin: 10px 0 0; padding-left: 18px; }
+      li { margin: 10px 0; }
+      .tag { display:inline-block; margin-left:8px; font-size:12px; color: var(--muted); }
     </style>
   </head>
   <body>
     <main class="wrap">
       <div class="top">
-        <h1 style="margin:0;">Projects</h1>
+        <h1 style="margin:0;">Certifications</h1>
         <a href="/">← Home</a>
       </div>
 
-      <div class="grid">
-        {projects.map((p) => (
-          <div class="card">
-            <h3 style="margin:0 0 6px;">{p.name}</h3>
-            <div class="muted">{p.desc}</div>
-            <div class="pill">{p.tech}</div>
-            <div style="margin-top:12px;">
-              <a href={p.link} target="_blank">Link →</a>
-            </div>
-          </div>
-        ))}
-      </div>
+      <section class="card">
+        <h2 style="margin:0 0 8px;">Degree</h2>
+        <div><strong>{degree.title}</strong></div>
+        <div class="muted">{degree.school}</div>
+        <div class="muted" style="margin-top:8px;">{degree.notes}</div>
+      </section>
+
+      <section class="card">
+        <h2 style="margin:0 0 8px;">Contact</h2>
+        <div class="muted">Email: <a href={`mailto:${email}`}>{email}</a></div>
+      </section>
+
+      <section class="card">
+        <h2 style="margin:0 0 8px;">Certificates</h2>
+        <div class="muted">Udemy • Forage • More coming soon</div>
+
+        <ul>
+          {certifications.map((c) => (
+            <li>
+              <strong>{c.title}</strong>
+              <span class="tag">({c.issuer} • {c.date})</span>
+              <div><a href={c.link} target="_blank">View credential →</a></div>
+            </li>
+          ))}
+        </ul>
+      </section>
     </main>
   </body>
 </html>
