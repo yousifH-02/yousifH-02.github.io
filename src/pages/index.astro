@@ -5,6 +5,7 @@ const location = "Houston, TX";
 const email = "YOUSIFMOYASER@GMAIL.COM";
 
 const quickLinks = [
+  { label: "Apps", href: "/apps/", note: "Mini apps + demos" },
   { label: "Certifications", href: "/certifications", note: "Udemy + Forage + PDFs" },
   { label: "Resume", href: "/resume", note: "View or download" },
   { label: "Contact", href: "/contact/", note: "Reach me fast" },
@@ -222,6 +223,7 @@ const initials = "YH";
         </div>
 
         <nav class="navlinks">
+          <a class="chip" href="/apps/">Apps</a>
           <a class="chip" href="/certifications">Certifications</a>
           <a class="chip" href="/resume">Resume</a>
           <a class="chip" href="/contact/">Contact</a>
@@ -243,6 +245,7 @@ const initials = "YH";
             <div class="ctaRow">
               <a class="btn btnPrimary" href="/resume">View Resume →</a>
               <a class="btn" href="/certifications">See Certifications →</a>
+              <a class="btn" href="/apps/">Try Apps →</a>
               <a class="btn" href={`mailto:${email}`}>Email Me →</a>
             </div>
           </div>
@@ -280,7 +283,7 @@ const initials = "YH";
       <footer class="footer">
         <div>© {new Date().getFullYear()} {name}</div>
         <div>
-          <a href="/certifications">Certifications</a> · <a href="/resume">Resume</a> · <a href="/contact/">Contact</a>
+          <a href="/apps/">Apps</a> · <a href="/certifications">Certifications</a> · <a href="/resume">Resume</a> · <a href="/contact/">Contact</a>
         </div>
       </footer>
     </div>
