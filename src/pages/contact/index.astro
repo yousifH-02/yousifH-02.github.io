@@ -1,0 +1,56 @@
+---
+const email = "YOUSIFMOYASER@GMAIL.COM";
+const phonePretty = "832-217-7825";
+const phoneDial = "8322177825";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yousif Husni | Contact</title>
+    <style>
+      :root { --bg:#0b0f17; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; }
+      body { margin:0; font-family: system-ui; background: var(--bg); color: var(--text); }
+      .wrap { max-width: 900px; margin: 0 auto; padding: 44px 20px; }
+      a { color:#93c5fd; text-decoration:none; }
+      .top { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+      .card { background: var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px; margin-top:14px; }
+      .muted { color: var(--muted); line-height: 1.55; }
+      .btnRow { display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px; }
+      .btn {
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.04);
+        font-size: 14px;
+        display:inline-flex; align-items:center; gap:10px;
+      }
+      .btn:hover { border-color: rgba(255,255,255,.22); }
+    </style>
+  </head>
+
+  <body>
+    <main class="wrap">
+      <div class="top">
+        <h1 style="margin:0;">Contact</h1>
+        <a href="/">← Home</a>
+      </div>
+
+      <section class="card">
+        <p class="muted" style="margin:0;">
+          For business inquiries, please reach me by email. During the holiday season, email responses may take <strong>2–3 business days</strong>.
+        </p>
+
+        <p class="muted" style="margin:12px 0 0;">
+          If email isn’t an option and the matter is time-sensitive, you may call as a last resort for professional business calls.
+        </p>
+
+        <div class="btnRow">
+          <a class="btn" href="mailto:YOUSIFMOYASER@GMAIL.COM">Email: YOUSIFMOYASER@GMAIL.COM</a>
+          <a class="btn" href="tel:8322177825">Call (last resort): 832-217-7825</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
