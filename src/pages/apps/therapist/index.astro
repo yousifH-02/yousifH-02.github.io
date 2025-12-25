@@ -1,0 +1,427 @@
+---
+const title = "Virtual Therapist";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+
+    <style>
+      :root{
+        --bg:#0b0f17; --card:#0f172a; --text:#e5e7eb; --muted:#9ca3af;
+        --line: rgba(255,255,255,.10);
+      }
+      *{ box-sizing:border-box; }
+      body{
+        margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        background: var(--bg); color: var(--text);
+      }
+      a{ color:#93c5fd; text-decoration:none; }
+      .wrap{ max-width: 920px; margin:0 auto; padding: 26px 16px 60px; }
+      .top{
+        display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+        border:1px solid var(--line); border-radius:16px; padding:12px 14px;
+        background: rgba(17,24,39,.35);
+      }
+      .top h1{ margin:0; font-size:18px; }
+      .muted{ color: var(--muted); }
+
+      .panel{
+        margin-top: 14px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(15,23,42,.35);
+        overflow:hidden;
+      }
+      .log{
+        height: 440px;
+        overflow:auto;
+        padding: 14px;
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+      }
+      .msg{
+        max-width: 78%;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(255,255,255,.03);
+        line-height: 1.45;
+        white-space: pre-wrap;
+      }
+      .me{ align-self:flex-end; background: rgba(147,197,253,.10); border-color: rgba(147,197,253,.25); }
+      .bot{ align-self:flex-start; }
+
+      .composer{
+        border-top: 1px solid var(--line);
+        padding: 12px;
+        display:flex;
+        gap:10px;
+        background: rgba(0,0,0,.12);
+      }
+      input{
+        flex: 1;
+        padding: 12px 12px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,.03);
+        color: var(--text);
+        outline:none;
+        font-size: 14px;
+      }
+      button{
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.05);
+        color: var(--text);
+        font-size: 14px;
+        cursor:pointer;
+      }
+      button:hover{ border-color: rgba(255,255,255,.22); }
+      .hint{ margin-top:10px; font-size: 12px; color: var(--muted); }
+    </style>
+  </head>
+
+  <body>
+    <main class="wrap">
+      <header class="top">
+        <h1>{title}</h1>
+        <a href="/apps/">← Apps</a>
+      </header>
+
+      <div class="hint">
+        Not medical advice. If you’re in danger or thinking about self-harm, call your local emergency number.
+      </div>
+
+      <section class="panel">
+        <div id="log" class="log" aria-live="polite"></div>
+
+        <form id="form" class="composer">
+          <input id="input" type="text" placeholder="Type 1, 2, or 3… then press Send." autocomplete="off" />
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+
+    <script is:inline>
+      (function () {
+        /** @type {HTMLDivElement|null} */
+        const log = document.getElementById("log");
+        /** @type {HTMLFormElement|null} */
+        const form = document.getElementById("form");
+        /** @type {HTMLInputElement|null} */
+        const input = document.getElementById("input");
+
+        if (!log || !form || !input) return;
+
+        // state
+        /** @type {"choose"|"chat"} */
+        let step = "choose";
+        /** @type {null|"vent"|"solve"|"calm"|"vent-chat"|"solve-chat"|"calm-chat"} */
+        let mode = null;
+
+        function addMsg(text, who) {
+          const el = document.createElement("div");
+          el.className = "msg " + (who === "me" ? "me" : "bot");
+          el.textContent = text;
+          log.appendChild(el);
+          log.scrollTop = log.scrollHeight;
+        }
+
+        function boot() {
+          addMsg("Hi — I’m your virtual support assistant.", "bot");
+          addMsg(
+            "Before I suggest anything, choose one:\n(1) Vent\n(2) Problem-solving\n(3) Quick calming technique\n\nType 1, 2, or 3.",
+            "bot"
+          );
+        }
+
+        function normalizeChoice(t) {
+          const s = t.trim().toLowerCase();
+          if (s === "1" || s.includes("vent")) return "vent";
+          if (s === "2" || s.includes("problem")) return "solve";
+          if (s === "3" || s.includes("calm")) return "calm";
+          return null;
+        }
+
+        function firstResponse() {
+          if (mode === "calm") {
+            addMsg(
+              "Quick reset:\n1) Inhale 4 seconds\n2) Hold 2 seconds\n3) Exhale 6 seconds\nRepeat 4 times.\n\nWhat’s the main feeling right now (stress, anger, anxiety, sadness)?",
+              "bot"
+            );
+            mode = "calm-chat";
+            return;
+          }
+          if (mode === "vent") {
+            addMsg("I’m here. Tell me what’s been on your mind — start wherever you want.", "bot");
+            mode = "vent-chat";
+            return;
+          }
+          if (mode === "solve") {
+            addMsg("Okay — in one sentence: what’s the problem, and what’s your goal?", "bot");
+            mode = "solve-chat";
+            return;
+          }
+        }
+
+        function followUp() {
+          if (mode === "vent-chat") {
+            addMsg("What part of this is hitting you the hardest right now?", "bot");
+            return;
+          }
+          if (mode === "solve-chat") {
+            addMsg("What are 2 options you could try (even if they’re not perfect)?", "bot");
+            return;
+          }
+          if (mode === "calm-chat") {
+            addMsg("Want a second technique (grounding), or talk through what triggered it?", "bot");
+            return;
+          }
+        }
+
+        boot();
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const text = input.value.trim();
+          if (!text) return;
+
+          addMsg(text, "me");
+          input.value = "";
+
+          if (step === "choose") {
+            const pick = normalizeChoice(text);
+            if (!pick) {
+              addMsg("I didn’t catch that. Please type 1, 2, or 3.", "bot");
+              return;
+            }
+            mode = pick;
+            step = "chat";
+            firstResponse();
+            return;
+          }
+
+          followUp();
+        });
+      })();
+    </script>
+  </body>
+</html>---
+const title = "Virtual Therapist";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+
+    <style>
+      :root{
+        --bg:#0b0f17; --card:#0f172a; --text:#e5e7eb; --muted:#9ca3af;
+        --line: rgba(255,255,255,.10);
+      }
+      *{ box-sizing:border-box; }
+      body{
+        margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        background: var(--bg); color: var(--text);
+      }
+      a{ color:#93c5fd; text-decoration:none; }
+      .wrap{ max-width: 920px; margin:0 auto; padding: 26px 16px 60px; }
+      .top{
+        display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+        border:1px solid var(--line); border-radius:16px; padding:12px 14px;
+        background: rgba(17,24,39,.35);
+      }
+      .top h1{ margin:0; font-size:18px; }
+      .muted{ color: var(--muted); }
+
+      .panel{
+        margin-top: 14px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(15,23,42,.35);
+        overflow:hidden;
+      }
+      .log{
+        height: 440px;
+        overflow:auto;
+        padding: 14px;
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+      }
+      .msg{
+        max-width: 78%;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(255,255,255,.03);
+        line-height: 1.45;
+        white-space: pre-wrap;
+      }
+      .me{ align-self:flex-end; background: rgba(147,197,253,.10); border-color: rgba(147,197,253,.25); }
+      .bot{ align-self:flex-start; }
+
+      .composer{
+        border-top: 1px solid var(--line);
+        padding: 12px;
+        display:flex;
+        gap:10px;
+        background: rgba(0,0,0,.12);
+      }
+      input{
+        flex: 1;
+        padding: 12px 12px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,.03);
+        color: var(--text);
+        outline:none;
+        font-size: 14px;
+      }
+      button{
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.05);
+        color: var(--text);
+        font-size: 14px;
+        cursor:pointer;
+      }
+      button:hover{ border-color: rgba(255,255,255,.22); }
+      .hint{ margin-top:10px; font-size: 12px; color: var(--muted); }
+    </style>
+  </head>
+
+  <body>
+    <main class="wrap">
+      <header class="top">
+        <h1>{title}</h1>
+        <a href="/apps/">← Apps</a>
+      </header>
+
+      <div class="hint">
+        Not medical advice. If you’re in danger or thinking about self-harm, call your local emergency number.
+      </div>
+
+      <section class="panel">
+        <div id="log" class="log" aria-live="polite"></div>
+
+        <form id="form" class="composer">
+          <input id="input" type="text" placeholder="Type 1, 2, or 3… then press Send." autocomplete="off" />
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+
+    <script is:inline>
+      (function () {
+        /** @type {HTMLDivElement|null} */
+        const log = document.getElementById("log");
+        /** @type {HTMLFormElement|null} */
+        const form = document.getElementById("form");
+        /** @type {HTMLInputElement|null} */
+        const input = document.getElementById("input");
+
+        if (!log || !form || !input) return;
+
+        // state
+        /** @type {"choose"|"chat"} */
+        let step = "choose";
+        /** @type {null|"vent"|"solve"|"calm"|"vent-chat"|"solve-chat"|"calm-chat"} */
+        let mode = null;
+
+        function addMsg(text, who) {
+          const el = document.createElement("div");
+          el.className = "msg " + (who === "me" ? "me" : "bot");
+          el.textContent = text;
+          log.appendChild(el);
+          log.scrollTop = log.scrollHeight;
+        }
+
+        function boot() {
+          addMsg("Hi — I’m your virtual support assistant.", "bot");
+          addMsg(
+            "Before I suggest anything, choose one:\n(1) Vent\n(2) Problem-solving\n(3) Quick calming technique\n\nType 1, 2, or 3.",
+            "bot"
+          );
+        }
+
+        function normalizeChoice(t) {
+          const s = t.trim().toLowerCase();
+          if (s === "1" || s.includes("vent")) return "vent";
+          if (s === "2" || s.includes("problem")) return "solve";
+          if (s === "3" || s.includes("calm")) return "calm";
+          return null;
+        }
+
+        function firstResponse() {
+          if (mode === "calm") {
+            addMsg(
+              "Quick reset:\n1) Inhale 4 seconds\n2) Hold 2 seconds\n3) Exhale 6 seconds\nRepeat 4 times.\n\nWhat’s the main feeling right now (stress, anger, anxiety, sadness)?",
+              "bot"
+            );
+            mode = "calm-chat";
+            return;
+          }
+          if (mode === "vent") {
+            addMsg("I’m here. Tell me what’s been on your mind — start wherever you want.", "bot");
+            mode = "vent-chat";
+            return;
+          }
+          if (mode === "solve") {
+            addMsg("Okay — in one sentence: what’s the problem, and what’s your goal?", "bot");
+            mode = "solve-chat";
+            return;
+          }
+        }
+
+        function followUp() {
+          if (mode === "vent-chat") {
+            addMsg("What part of this is hitting you the hardest right now?", "bot");
+            return;
+          }
+          if (mode === "solve-chat") {
+            addMsg("What are 2 options you could try (even if they’re not perfect)?", "bot");
+            return;
+          }
+          if (mode === "calm-chat") {
+            addMsg("Want a second technique (grounding), or talk through what triggered it?", "bot");
+            return;
+          }
+        }
+
+        boot();
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const text = input.value.trim();
+          if (!text) return;
+
+          addMsg(text, "me");
+          input.value = "";
+
+          if (step === "choose") {
+            const pick = normalizeChoice(text);
+            if (!pick) {
+              addMsg("I didn’t catch that. Please type 1, 2, or 3.", "bot");
+              return;
+            }
+            mode = pick;
+            step = "chat";
+            firstResponse();
+            return;
+          }
+
+          followUp();
+        });
+      })();
+    </script>
+  </body>
+</html>
