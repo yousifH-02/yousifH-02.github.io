@@ -15,7 +15,7 @@ const apps = [
   {
     title: "Student Grade Calculator",
     desc: "A practical student tool designed to calculate weighted grades and estimate the score needed on a final exam.",
-    href: "#",
+    href: "/apps/grade-calculator/",
     tag: "Education Tool",
   },
   {
@@ -24,34 +24,151 @@ const apps = [
     href: "#",
     tag: "Cybersecurity",
   },
-]
+];
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Yousif Husni | Apps</title>
     <style>
-      :root { --bg:#0b0f17; --card:#0f172a; --text:#e5e7eb; --muted:#9ca3af; --line: rgba(255,255,255,.10); }
-      *{ box-sizing:border-box; }
-      body{ margin:0; font-family: ui-sans-serif, system-ui; background: var(--bg); color: var(--text); }
-      a{ color: inherit; text-decoration:none; }
-      .wrap{ max-width: 980px; margin:0 auto; padding: 28px 18px 54px; }
-      .top{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
-        border:1px solid var(--line); border-radius:16px; padding:12px 14px; background: rgba(17,24,39,.35); }
-      .top h1{ margin:0; font-size:18px; }
-      .home{ color:#93c5fd; font-size:13px; }
-      .grid{ margin-top: 12px; display:grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      @media (max-width: 760px){ .grid{ grid-template-columns: 1fr; } }
-      .card{ border:1px solid var(--line); border-radius:18px; padding:14px; background: rgba(15,23,42,.35); }
-      .muted{ color: var(--muted); }
-      .tag{ display:inline-block; margin-top: 10px; font-size:12px; color: var(--muted); border:1px solid var(--line); padding:6px 10px; border-radius:999px; }
-      .btn{ margin-top:12px; display:inline-flex; padding:10px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.12);
-        background: rgba(255,255,255,.04); font-size:13px; }
-      .btn:hover{ border-color: rgba(255,255,255,.22); }
+      :root {
+        --bg: #0b0f17;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --line: rgba(255, 255, 255, 0.1);
+        --card: rgba(15, 23, 42, 0.52);
+        --blue: #93c5fd;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(900px 420px at 15% 0%, rgba(147, 197, 253, 0.14), transparent 60%),
+          radial-gradient(800px 420px at 85% 10%, rgba(167, 139, 250, 0.1), transparent 55%),
+          var(--bg);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 28px 18px 54px;
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 12px 14px;
+        background: rgba(17, 24, 39, 0.45);
+      }
+
+      .top h1 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      .home {
+        color: var(--blue);
+        font-size: 13px;
+      }
+
+      .intro {
+        margin-top: 14px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px;
+        background: rgba(15, 23, 42, 0.35);
+      }
+
+      .intro h2 {
+        margin: 0 0 8px;
+        font-size: 30px;
+        letter-spacing: -0.04em;
+      }
+
+      .intro p {
+        margin: 0;
+        max-width: 720px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .grid {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      @media (max-width: 760px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px;
+        background: var(--card);
+      }
+
+      .card h2 {
+        margin: 0 0 8px;
+        font-size: 17px;
+      }
+
+      .muted {
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .tag {
+        display: inline-block;
+        margin-top: 12px;
+        font-size: 12px;
+        color: var(--muted);
+        border: 1px solid var(--line);
+        padding: 6px 10px;
+        border-radius: 999px;
+      }
+
+      .btn {
+        margin-top: 12px;
+        display: inline-flex;
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.05);
+        font-size: 13px;
+      }
+
+      .btn:hover {
+        border-color: rgba(255, 255, 255, 0.28);
+      }
+
     </style>
   </head>
+
   <body>
     <main class="wrap">
       <header class="top">
@@ -59,14 +176,24 @@ const apps = [
         <a class="home" href="/">← Home</a>
       </header>
 
+      <section class="intro">
+        <h2>Projects and mini apps</h2>
+        <p>
+          A collection of practical web apps, experiments, and portfolio demos built to show software development,
+          problem solving, and user-focused design.
+        </p>
+      </section>
+
       <section class="grid">
-        {apps.map((a) => (
+        {apps.map((app) => (
           <article class="card">
-            <h2 style="margin:0 0 6px; font-size:16px;">{a.title}</h2>
-            <div class="muted">{a.desc}</div>
-            <div class="tag">{a.tag}</div>
+            <h2>{app.title}</h2>
+            <div class="muted">{app.desc}</div>
+            <div class="tag">{app.tag}</div>
             <div>
-              <a class="btn" href={a.href}>Open →</a>
+              <a class="btn" href={app.href}>
+  {app.href === "#" ? "Coming soon" : "Open →"}
+</a>
             </div>
           </article>
         ))}
