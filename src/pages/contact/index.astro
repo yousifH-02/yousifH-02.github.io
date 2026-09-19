@@ -2,7 +2,6 @@
 const email = "YOUSIFMOYASER@GMAIL.COM";
 const phonePretty = "832-217-7825";
 const phoneDial = "8322177825";
-
 const linkedinUrl = "https://www.linkedin.com/in/yousif-husni-336b98372";
 const instagramHandle = "@YXSF.H";
 const instagramUrl = "https://www.instagram.com/YXSF.H/";
@@ -14,10 +13,11 @@ const instagramUrl = "https://www.instagram.com/YXSF.H/";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Yousif Husni | Contact</title>
     <style>
-      :root { --bg:#0b0f17; --card:#0f172a; --text:#e5e7eb; --muted:#9ca3af; --line: rgba(255,255,255,.10); }
+      :root { --bg:#0b0f17; --text:#e5e7eb; --muted:#9ca3af; --line: rgba(255,255,255,.10); }
       *{ box-sizing:border-box; }
       body{
-        margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        margin:0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
         background:
           radial-gradient(1200px 600px at 10% 0%, rgba(147,197,253,.14), transparent 60%),
           radial-gradient(900px 500px at 90% 10%, rgba(167,139,250,.10), transparent 55%),
@@ -33,24 +33,19 @@ const instagramUrl = "https://www.instagram.com/YXSF.H/";
       }
       .top h1{ margin:0; font-size: 18px; letter-spacing: .2px; }
       .home{ color:#93c5fd; font-size: 13px; }
-
       .intro{
         margin-top: 14px;
         border:1px solid var(--line); border-radius:18px; padding:16px;
         background: rgba(15,23,42,.35);
       }
       .intro p{ margin:0; color: var(--muted); line-height:1.55; }
-
       .grid{
         margin-top: 12px;
         display:grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
       }
-      @media (max-width: 760px){
-        .grid{ grid-template-columns: 1fr; }
-      }
-
+      @media (max-width: 760px){ .grid{ grid-template-columns: 1fr; } }
       .card{
         border:1px solid var(--line); border-radius:18px; padding:14px;
         background: rgba(15,23,42,.35);
@@ -58,7 +53,6 @@ const instagramUrl = "https://www.instagram.com/YXSF.H/";
       .label{ font-size:12px; color: var(--muted); margin:0 0 6px; }
       .value{ margin:0; font-size:15px; }
       .hint{ margin:8px 0 0; font-size:12px; color: var(--muted); line-height:1.45; }
-
       .actions{ margin-top: 10px; display:flex; gap:10px; flex-wrap:wrap; }
       .btn{
         padding: 9px 11px;
@@ -69,7 +63,6 @@ const instagramUrl = "https://www.instagram.com/YXSF.H/";
         display:inline-flex; align-items:center; gap:10px;
       }
       .btn:hover{ border-color: rgba(255,255,255,.22); }
-
       .footer{
         margin-top: 14px;
         color: var(--muted);
@@ -126,7 +119,7 @@ const instagramUrl = "https://www.instagram.com/YXSF.H/";
         <div class="card">
           <p class="label">Phone (last resort)</p>
           <p class="value">{phonePretty}</p>
-          <p class="hint">Use only if email isn’t an option and the matter is time-sensitive.</p>
+          <p class="hint">Use only if email is not an option and the matter is time-sensitive.</p>
           <div class="actions">
             <a class="btn" href={`tel:${phoneDial}`}>Call →</a>
           </div>
