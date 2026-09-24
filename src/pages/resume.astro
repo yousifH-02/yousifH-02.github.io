@@ -1,28 +1,4 @@
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Yousif Husni | Personal Site</title>
-    <style>
-      :root { --bg:#0b0f17; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; }
-      body { margin:0; font-family: system-ui; background: var(--bg); color: var(--text); }
-      .wrap { max-width: 900px; margin: 0 auto; padding: 44px 20px; }
-      a { color:#93c5fd; text-decoration:none; }
-      .box { margin-top:16px; background: var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px; }
-      .muted { color: var(--muted); }
-    </style>
-  </head>
-  <body>
-    <main class="wrap">
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
-        <h1 style="margin:0;">Resume</h1>
-        <a href="/">← Home</a>
-      </div>
-
-      <div class="box">
-        <p class="muted" style="margin:0 0 10px;">Open or download my resume:</p>
-        <a href="/resume.pdf" target="_blank">resume.pdf →</a>
-      </div>
-    </main>
-  </body>
-</html>
+---
+import Layout from "../layouts/Layout.astro";
+---
+<Layout title="Resume — Yousif Husni"><section class="container resume-page"><p class="eyebrow">THE DETAILS / RESUME</p><h1>Experience,<br/>on paper<span>.</span></h1><p class="muted body-copy">Yousif Husni · Computer Science · University of Houston<br/>Full-stack development & applied AI</p><div class="actions"><a class="button primary" href="/resume.pdf" download="Yousif-Husni-Resume.pdf">Download resume ↓</a><a class="button" href="/resume.pdf" target="_blank" rel="noopener noreferrer">Open PDF ↗</a></div><object class="resume-preview" data="/resume.pdf" type="application/pdf" aria-label="Yousif Husni resume"><p>Your browser doesn't support inline PDFs. <a href="/resume.pdf">Open the resume</a> to read it.</p></object></section></Layout>
