@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 
 const experiences = [
   {
-    role: "Project Hedgejoh",
+    role: "Project Hedgehog",
     company: "Handshake AI",
     date: "Apr 2026 — Present",
     summary: "AI evaluation and structured human feedback.",
@@ -49,11 +49,11 @@ const projects = [
   {
     number: "02",
     title: "CodeWatch",
-    type: "AI Code Detection Platform",
-    metric: "~85% accuracy",
-    stack: "Python · PyTorch · CodeT5+ · GPT-4o-mini",
+    type: "Independent Browser App",
+    metric: "100% local analysis",
+    stack: "JavaScript · Explainable Rules · Browser APIs",
     description:
-      "AI-generated code detection using a dual-model architecture and GraphCodeBERT fine-tuning on CodeNet C++ data, reducing false positives by roughly 40%.",
+      "A standalone code-inspection workspace with line-level findings, local file loading, and downloadable reports. Your source stays on your device.",
   },
 ];
 
@@ -70,8 +70,8 @@ const projects = [
   <section id="projects" class="section container">
     <div class="section-head"><div><p class="eyebrow">01 / SELECTED WORK</p><h2>Built with purpose.</h2></div><p class="muted">A few things I've been<br/>thinking about. And building.</p></div>
     <div class="project-grid">{projects.map((project, index) => <article class:list={["project-card", index === 0 ? "voice-card" : "code-card"]}>
-      <div class="project-visual" aria-hidden="true"><div class="visual-top mono"><span>{index === 0 ? "VOICE → INSIGHT" : "CODE → SIGNAL"}</span><span>0{index + 1}</span></div>{index === 0 ? <div class="wave">{Array.from({length: 41}, (_, i) => <span style={`--h:${18 + Math.abs(Math.sin(i * .73) * Math.cos(i * .18)) * 110}px;--d:${i * 35}ms`}></span>)}</div> : <div class="code-art"><span class="code-comment">// look beyond the syntax</span><br/><span class="code-keyword">const</span> insight = <span class="code-function">detect</span>({'{'}<br/>&nbsp; source: <span class="code-string">"human or AI?"</span>,<br/>&nbsp; model: <span class="code-string">"CodeT5+"</span><br/>{'}'});<span class="code-cursor">▌</span></div>}<div class="visual-bottom mono"><span>{index === 0 ? "APPLIED MACHINE LEARNING" : "AI CODE DETECTION"}</span><span>↗</span></div></div>
-      <div class="project-body"><p class="eyebrow">{project.type}</p><h3>{project.title}</h3><p class="muted">{project.description}</p><div class="metric"><strong>{project.metric}</strong><span>{index === 0 ? "StratifiedGroupKFold validation" : "Problem-extraction approach"}</span></div><details><summary>Explore the project <span>+</span></summary><p>{index === 0 ? "Trained a Random Forest classifier on 195+ patient voice recordings. A separate UPDRS symptom predictor uses 16 vocal features across 5,875 recordings, achieving MAE below 7.0. The conversational interface connects Next.js, Gmail OAuth, and Supabase." : "Combines CodeT5+ and GPT-4o-mini in a singleton architecture that returns detection results in under 60 seconds. Fine-tuned GraphCodeBERT with PyTorch SimCSE on CodeNet C++ data, reducing false positives by 40%."}</p></details><p class="stack mono">{project.stack}</p></div>
+      <div class="project-visual" aria-hidden="true"><div class="visual-top mono"><span>{index === 0 ? "VOICE → INSIGHT" : "CODE → SIGNAL"}</span><span>0{index + 1}</span></div>{index === 0 ? <div class="wave">{Array.from({length: 41}, (_, i) => <span style={`--h:${18 + Math.abs(Math.sin(i * .73) * Math.cos(i * .18)) * 110}px;--d:${i * 35}ms`}></span>)}</div> : <div class="code-art"><span class="code-comment">// look beyond the syntax</span><br/><span class="code-keyword">const</span> insight = <span class="code-function">detect</span>({'{'}<br/>&nbsp; source: <span class="code-string">"your source code"</span>,<br/>&nbsp; mode: <span class="code-string">"local inspection"</span><br/>{'}'});<span class="code-cursor">▌</span></div>}<div class="visual-bottom mono"><span>{index === 0 ? "APPLIED MACHINE LEARNING" : "CODE PATTERN INSPECTION"}</span><span>↗</span></div></div>
+      <div class="project-body"><p class="eyebrow">{project.type}</p><h3>{project.title}</h3><p class="muted">{project.description}</p><div class="metric"><strong>{project.metric}</strong><span>{index === 0 ? "StratifiedGroupKFold validation" : "No upload. No account required."}</span></div><details><summary>Explore the project <span>+</span></summary><p>{index === 0 ? "Trained a Random Forest classifier on 195+ patient voice recordings. A separate UPDRS symptom predictor uses 16 vocal features across 5,875 recordings, achieving MAE below 7.0. The conversational interface connects Next.js, Gmail OAuth, and Supabase." : "Built from scratch as an independent browser edition. CodeWatch explains repeated lines, unfinished work, debugging calls, and other review cues. It uses transparent text rules and does not claim to determine AI authorship."}</p></details><p class="stack mono">{project.stack}</p>{index === 1 && <a class="button primary project-launch" href="https://codewatch-yousif.yousniff02.chatgpt.site" target="_blank" rel="noopener noreferrer">Launch CodeWatch ↗</a>}</div>
     </article>)}</div>
     <a class="playground" href="/apps/"><div><span class="eyebrow">THE PLAYGROUND</span><h3>Small builds. Big curiosity.</h3><p class="muted">Five games, tools, and experiments. Try something out.</p></div><span class="big-arrow">↗</span></a>
   </section>

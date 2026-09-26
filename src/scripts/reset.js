@@ -1,0 +1,16 @@
+const prompts={reflect:["What's taking up space in your mind?","What feels most important about this?","What would feel supportive right now?"],plan:["What's the situation, and what would you like to change?","What's in your control? List a couple of possible actions.","Choose one small step. When could you take it?"]};
+const notes={reflect:['','',''],plan:['','','']};let mode='reflect',step=0,breathing=false,timer,phase=0,seconds=4;
+const thought=document.querySelector('#thought'),status=document.querySelector('#reflection-status');
+function save(){if(mode!=='breathe')notes[mode][step]=thought.value;}
+function render(){document.querySelector('#step-count').textContent=`PROMPT ${step+1} OF 3`;document.querySelector('#prompt').textContent=prompts[mode][step];thought.value=notes[mode][step];document.querySelector('#previous').disabled=step===0;document.querySelector('#next').textContent=step===2?'Finish reflection ✓':'Next prompt →';status.textContent='';}
+thought.addEventListener('input',save);
+document.querySelector('#previous').addEventListener('click',()=>{save();step=Math.max(0,step-1);render();});
+document.querySelector('#next').addEventListener('click',()=>{save();if(step<2){step++;render();thought.focus();}else{status.textContent='A little clearer, one thought at a time. You can revisit your answers or save your notes.';}});
+document.querySelector('#start-over').addEventListener('click',()=>{notes[mode]=['','',''];step=0;render();thought.focus();});
+document.querySelector('#download').addEventListener('click',()=>{save();const text=prompts[mode].map((q,i)=>`${q}\n${notes[mode][i]||'(No answer)'}\n`).join('\n');const url=URL.createObjectURL(new Blob([`Reset — ${mode==='plan'?'Next steps':'Reflection'}\n\n${text}`],{type:'text/plain'}));const a=document.createElement('a');a.href=url;a.download='reset-notes.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent='Your notes are ready to save.';});
+const circle=document.querySelector('#breath-circle'),label=document.querySelector('#breath-label'),count=document.querySelector('#breath-count'),toggle=document.querySelector('#breath-toggle');
+function stop(){clearInterval(timer);breathing=false;circle.classList.remove('inhale');label.textContent='Settle in';count.textContent='Your own pace is okay.';toggle.textContent='Begin breathing';}
+function showBreath(){label.textContent=phase===0?'Breathe in':'Breathe out';count.textContent=`${seconds} seconds`;circle.classList.toggle('inhale',phase===0);}
+toggle.addEventListener('click',()=>{if(breathing){stop();return;}breathing=true;phase=0;seconds=4;showBreath();toggle.textContent='Stop';timer=setInterval(()=>{seconds--;if(seconds===0){phase=1-phase;seconds=phase===0?4:6;}showBreath();},1000);});
+document.querySelectorAll('[data-mode]').forEach(button=>button.addEventListener('click',()=>{save();stop();mode=button.dataset.mode;step=0;document.querySelectorAll('[data-mode]').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',String(b===button));});document.querySelector('#reflection').hidden=mode==='breathe';document.querySelector('#breathing').hidden=mode!=='breathe';if(mode!=='breathe')render();}));
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});render();

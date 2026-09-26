@@ -1,0 +1,13 @@
+---
+import Layout from './Layout.astro';
+import '../styles/apps.css';
+const { title, category, description } = Astro.props;
+---
+<Layout title={`${title} — Yousif's Lab`} description={description}>
+  <div class="container lab-shell">
+    <div class="lab-breadcrumb"><a href="/apps/">← The lab</a><span>{category}</span></div>
+    <header class="app-header"><div><p class="eyebrow">AN EXPERIMENT BY YOUSIF HUSNI</p><h1>{title}<span>.</span></h1></div><p>{description}</p></header>
+    <slot/>
+    <div class="app-end"><span>Built to be used. Made to be explored.</span><a href="/apps/">Explore more experiments ↗</a></div>
+  </div>
+</Layout>
